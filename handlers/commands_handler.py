@@ -18,8 +18,6 @@ async def start_cmd(message: types.Message):
 
 @router.message()
 async def handle_query(message: types.Message):
-    wait_msg = await message.answer("⏳ Анализирую данные...")
-    
     try:
         async_session = db_init()        
         raw_sql_query = get_sql_from_llm(message.text)
@@ -31,9 +29,9 @@ async def handle_query(message: types.Message):
 
         if value is None:
             value = 0
-            
-        await wait_msg.edit_text(f"{value}")
+        
+        await message.answer(f"{value}")
         
     except Exception as e:
-        await wait_msg.edit_text(f"Произошла ошибка при обработке запроса.")
+        await message.answer(f"Произошла ошибка при обработке запроса.")
         print(f"Error: {e}")
