@@ -43,6 +43,9 @@ SYSTEM_PROMPT_TEMPLATE = """
 Вопрос: "На сколько выросли просмотры 28 ноября 2025?"
 Ответ: SELECT SUM(delta_views_count) FROM video_snapshots WHERE created_at::date = '2025-11-28';
 
+Вопрос: "Сколько просмотров было с двадцать восьмого ноября 2025 года по 29е ноября 2025 года?"
+Ответ: SELECT SUM(views_count) FROM videos WHERE video_created_at >= '2025-11-28' AND video_created_at < '2025-30-11';
+
 Вопрос: "Сколько видео набрали больше 1000 лайков?"
 Ответ: SELECT COUNT(*) FROM videos WHERE likes_count > 1000;
 """
